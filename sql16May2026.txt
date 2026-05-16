@@ -1,0 +1,45 @@
+CREATE DATABASE VITCampus;
+USE VITCampus;
+
+CREATE TABLE Semester_1 (
+    student_id VARCHAR(15) PRIMARY KEY,
+    student_name VARCHAR(50) NOT NULL,
+    student_marks VARCHAR(10) NOT NULL
+);
+
+INSERT INTO Semester_1 (student_id, student_name, student_marks) VALUES
+('24BCY10065', 'Pratyush Verma', '92/100'),
+('24BCE10023', 'Arjun Sharma', '88/100'),
+('24BCE10047', 'Priya Iyer', '94/100'),
+('24BCY10112', 'Rohan Mehta', '76/100'),
+('24BCE10089', 'Ananya Reddy', '85/100');
+
+CREATE TABLE Semester_2 (
+    student_id VARCHAR(15) PRIMARY KEY,
+    student_name VARCHAR(50) NOT NULL,
+    student_marks VARCHAR(10) NOT NULL
+);
+
+INSERT INTO Semester_2 (student_id, student_name, student_marks) VALUES
+('24BCY10065', 'Pratyush Verma', '87/100'),
+('24BCE10023', 'Arjun Sharma', '79/100'),
+('24BCE10047', 'Priya Iyer', '91/100'),
+('24BCY10112', 'Rohan Mehta', '82/100'),
+('24BCE10089', 'Ananya Reddy', '74/100');
+
+CREATE TABLE Semester_3 (
+    student_id VARCHAR(15) PRIMARY KEY,
+    student_name VARCHAR(50) NOT NULL,
+    student_marks VARCHAR(10) NOT NULL
+);
+
+INSERT INTO Semester_3 (student_id, student_name, student_marks) VALUES
+('24BCY10065', 'Pratyush Verma', '95/100'),
+('24BCE10023', 'Arjun Sharma', '83/100'),
+('24BCE10047', 'Priya Iyer', '89/100'),
+('24BCY10112', 'Rohan Mehta', '71/100'),
+('24BCE10089', 'Ananya Reddy', '90/100');
+
+SELECT * FROM Semester_1;
+SELECT * FROM Semester_2;
+SELECT * FROM Semester_3;
