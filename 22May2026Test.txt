@@ -1,0 +1,53 @@
+1. Write an SQL query to fetch “FIRST_NAME” from Worker table using the alias name as <WORKER_NAME>
+Ans -SELECT FIRST_NAME AS WORKER_NAME FROM Worker;
+
+
+
+2. Write an SQL query to fetch unique values of DEPARTMENT from Worker table.
+Ans-SELECT DISTINCT DEPARTMENT FROM Worker;
+
+
+
+3. Write an SQL query to print details for Workers with the first name as “Vipul” and “Satish” from Worker table. (without OR condition)
+Ans-SELECT * FROM Worker WHERE FIRST_NAME IN ('Vipul', 'Satish');
+
+
+
+4. Write an SQL query to print details of the Workers whose FIRST_NAME contains ‘a’.
+Ans- SELECT * FROM Worker WHERE FIRST_NAME LIKE '%a%';
+
+
+
+5. Write an SQL query to print details of the Workers whose FIRST_NAME ends with ‘a’.
+Ans-SELECT * FROM Worker WHERE FIRST_NAME LIKE '%a';
+
+
+
+6. Write an SQL query to print details of the admin whose SALARY lies between 100000 and 500000.
+Ans-SELECT * FROM Worker WHERE DEPARTMENT = 'Admin' AND SALARY BETWEEN 100000 AND 500000;
+
+
+
+7. Write an SQL query to fetch the count of employees working in the department ‘Admin’.
+Ans-SELECT DEPARTMENT, COUNT(*) AS WORKER_COUNT FROM Worker WHERE DEPARTMENT = 'Admin';
+
+
+
+8. Write an SQL query to show the second highest salary from a table.
+Ans-SELECT MAX(SALARY) AS SECOND_HIGHEST_SALARY FROM Worker WHERE SALARY < (SELECT MAX(SALARY) FROM Worker);
+
+
+
+9.Write an SQL query to fetch the departments that have less than three people in it.
+Ans- SELECT DEPARTMENT, COUNT(*) AS WORKER_COUNT FROM Worker GROUP BY DEPARTMENT HAVING COUNT(*) < 3;
+
+
+
+10. Write an SQL query to show all departments along with the total number of people in there.
+Ans-SELECT DEPARTMENT, COUNT(*) AS WORKER_COUNT FROM Worker GROUP BY DEPARTMENT;
+
+
+
+
+11. Write an SQL query to print the name of employees having the highest salary in each department.
+Ans -SELECT W.DEPARTMENT, W.FIRST_NAME, W.SALARY FROM Worker WINNER JOIN (SELECT DEPARTMENT, MAX(SALARY) AS MAX_SALARY FROM Worker GROUP BY DEPARTMENT) AS DEPT_MAX ON W.DEPARTMENT = DEPT_MAX.DEPARTMENT AND W.SALARY = DEPT_MAX.MAX_SALARY;
