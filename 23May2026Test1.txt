@@ -1,0 +1,202 @@
+Q1. [JOINS] List the name of each employee along with their job title and department name.
+
+SELECT e.name, j.job_title, d.dept_name
+FROM Employees e
+JOIN Jobs j ON e.job_id = j.job_id
+JOIN Departments d ON e.dept_id = d.dept_id;
+
+
+
+Q2. [SUBQUERY] Find all employees whose salary is higher than the average salary of the 'IT' department.
+
+SELECT name, salary
+FROM Employees
+WHERE salary > (
+    SELECT AVG(salary)
+    FROM Employees e
+    JOIN Departments d ON e.dept_id = d.dept_id
+    WHERE d.dept_name = 'IT'
+);
+
+
+Q3. [GROUP BY] Calculate the total salary expenditure for each department name.
+
+SELECT d.dept_name, SUM(e.salary) AS total_salary
+FROM Employees e
+JOIN Departments d ON e.dept_id = d.dept_id
+GROUP BY d.dept_name;
+
+
+
+Q4. [HAVING] Display departments that have more than 2 employees and an average salary above 70,000.
+
+SELECT d.dept_name, COUNT(*) AS emp_count, AVG(e.salary) AS avg_salary
+FROM Employees e
+JOIN Departments d ON e.dept_id = d.dept_id
+GROUP BY d.dept_name
+HAVING COUNT(*) > 2 AND AVG(e.salary) > 70000;
+
+
+Q5. [SELF JOIN] Retrieve a list of employee names and their respective manager's names.
+
+SELECT e.name AS employee_name, m.name AS manager_name
+FROM Employees e
+LEFT JOIN Employees m ON e.manager_id = m.emp_id;
+```
+
+---
+
+
+
+Q6. [ORDER BY] Find the top 3 highest-paid employees in descending order.
+
+SELECT name, salary
+FROM Employees
+ORDER BY salary DESC
+LIMIT 3;
+
+
+
+
+Q7. [JOINS + WHERE] Find all Developers working in the 'San Francisco' location.
+
+SELECT e.name, j.job_title, d.location
+FROM Employees e
+JOIN Jobs j ON e.job_id = j.job_id
+JOIN Departments d ON e.dept_id = d.dept_id
+WHERE j.job_title = 'Developer'
+AND d.location = 'San Francisco';
+
+
+
+
+Q8. [GROUP BY] Find the number of employees hired each year.
+
+SELECT YEAR(hire_date) AS hire_year, COUNT(*) AS total_hired
+FROM Employees
+GROUP BY YEAR(hire_date)
+ORDER BY hire_year;
+
+
+
+
+Q9. [HAVING] List job titles where the maximum salary of an employee in that role is less than 100,000.
+
+SELECT j.job_title, MAX(e.salary) AS max_salary
+FROM Employees e
+JOIN Jobs j ON e.job_id = j.job_id
+GROUP BY j.job_title
+HAVING MAX(e.salary) < 100000;
+
+
+
+
+Q10. [SUBQUERY] Find the names of employees who work in the same department as 'David'.
+
+SELECT name
+FROM Employees
+WHERE dept_id = (
+    SELECT dept_id
+    FROM Employees
+    WHERE name = 'David'
+)
+AND name != 'David';
+
+
+
+
+Q11. [MULTI-TABLE JOIN] Show all department names even if they have no employees assigned.
+
+SELECT d.dept_name, COUNT(e.emp_id) AS total_employees
+FROM Departments d
+LEFT JOIN Employees e ON d.dept_id = e.dept_id
+GROUP BY d.dept_name;
+
+
+
+
+Q12. [COMPLEX FILTER] Find employees hired between 2018 and 2020 who earn more than 60,000.
+
+SELECT name, salary, hire_date
+FROM Employees
+WHERE YEAR(hire_date) BETWEEN 2018 AND 2020
+AND salary > 60000;
+
+
+
+
+Q14. [JOINS] Find the job title and salary of the employee with ID 504.
+
+SELECT j.job_title, e.salary
+FROM Employees e
+JOIN Jobs j ON e.job_id = j.job_id
+WHERE e.emp_id = 504;
+
+
+
+
+Q15. [GROUP BY] For each manager, find the minimum salary of the people reporting to them.
+
+SELECT manager_id, MIN(salary) AS min_salary
+FROM Employees
+WHERE manager_id IS NOT NULL
+GROUP BY manager_id;
+
+
+
+
+Q17. [AGGREGATION] Find the difference between the highest and lowest salary in the company.
+
+SELECT MAX(salary) - MIN(salary) AS salary_difference
+FROM Employees;
+
+
+
+
+Q18. [JOIN + ORDER BY] Display employee names and hire dates, sorted by department name (A-Z) then salary (High to Low).
+
+SELECT e.name, e.hire_date, d.dept_name, e.salary
+FROM Employees e
+JOIN Departments d ON e.dept_id = d.dept_id
+ORDER BY d.dept_name ASC, e.salary DESC;
+
+
+
+
+Q19. [HAVING] Identify managers who manage more than 2 people.
+
+SELECT manager_id, COUNT(*) AS total_reportees
+FROM Employees
+WHERE manager_id IS NOT NULL
+GROUP BY manager_id
+HAVING COUNT(*) > 2;
+
+
+
+
+Q21. [LEFT JOIN] List all job titles and the number of employees currently holding that job.
+
+SELECT j.job_title, COUNT(e.emp_id) AS total_employees
+FROM Jobs j
+LEFT JOIN Employees e ON j.job_id = e.job_id
+GROUP BY j.job_title;
+
+
+
+
+Q22. [JOIN + LIKE] Find employees in the 'Finance' department whose names contain the letter 'i'.
+
+SELECT e.name, d.dept_name
+FROM Employees e
+JOIN Departments d ON e.dept_id = d.dept_id
+WHERE d.dept_name = 'Finance'
+AND e.name LIKE '%i%';
+
+
+
+Q25. [JOINS] Find all employees who report to 'Charlie'.
+
+SELECT e.name AS employee_name
+FROM Employees e
+JOIN Employees m ON e.manager_id = m.emp_id
+WHERE m.name = 'Charlie';
