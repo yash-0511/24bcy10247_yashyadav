@@ -1,0 +1,32 @@
+show collections
+Employee                    ^
+db.Employee.insert({name:'Prashant', department:'CSE'})
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6a1458e89fe9ce560a3a6b8c')
+  }
+}
+db.Employee.insert({name:'Aryan', marks:'93', location:'Bihar'})
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6a1459909fe9ce560a3a6b8d')
+  }
+}
+db.Employee.find()
+{
+  _id: ObjectId('6a1458e89fe9ce560a3a6b8c'),
+  name: 'Prashant',
+  department: 'CSE'
+}
+{
+  _id: ObjectId('6a1459909fe9ce560a3a6b8d'),
+  name: 'Aryan',
+  marks: '93',
+  location: 'Bihar'
+}
+vit
+Selection deleted
+
+
